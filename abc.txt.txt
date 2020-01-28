@@ -1,0 +1,107 @@
+package demon;
+
+public class class1 {
+	static node head;
+	static class node{
+		int data;
+		node prev;
+		node next;
+		node(int data)
+		{
+			this.data=data;
+			this.prev=null;
+			this.next=null;
+		}
+	}
+		public static void insert(int data)
+		{
+			node newNode=new node(data);
+			if(head==null)
+			{
+				head=newNode;
+			}
+			else
+			{
+				node temp=head;
+				while(temp.next!=null)
+				{
+					temp=temp.next;
+				}
+				temp.next=newNode;
+				newNode.prev=temp;
+				newNode.next=null;
+			}
+		}
+		
+		public static void pairs(int k)
+		{
+			node fr=head;
+			node pr=head;
+			while(pr.next!=null)
+			{
+				pr=pr.next;
+			}
+			boolean check=false;
+			while(fr!=null&&pr!=null&&fr!=pr&&pr.next!=fr)
+			{
+				if((fr.data+pr.data)==k)
+				{
+					check=true;
+					System.out.println("("+fr.data+","+pr.data+")");
+					fr=fr.next;
+					pr=pr.prev;
+				}
+				else
+				{
+					if((fr.data+pr.data)<k)
+					{
+						fr=fr.next;
+					}
+					else
+					{
+						pr=pr.prev;
+					}
+				}
+			}
+			if(check==false)
+			{
+				System.out.println("Not Found");
+			}
+		}
+		
+		
+		public static void display()
+		{
+			if(head==null)
+			{
+				System.out.println("empty linked list");
+			}
+			else
+			{
+				node temp=head;
+				while(temp.next!=null)
+				{
+					System.out.print(temp.data+" ");
+					temp=temp.next;
+				}
+			}
+		}
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		class1 li=new class1();
+		li.insert(1);
+		li.insert(2);
+		li.insert(4);
+		li.insert(5);
+		li.insert(6);
+		li.insert(8);
+		li.insert(9);
+		li.pairs(7);
+		li.display();
+		
+
+	}
+
+}
